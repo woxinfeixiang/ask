@@ -1,0 +1,33 @@
+<?php 
+//载入Thinkphp核心标签类
+import('TagLib');
+/**
+ * 自定义标签类
+ */
+Class TagLibHd extends TagLib {
+	//自定义标签
+	Protected $tags = array(
+		'topcates' => array('attr' => 'limit'),
+	);
+
+	//顶级分类对标签
+	Public function _topcates ($attr, $content) {
+		$attr = $this->parseXmlAttr($attr);
+		$limit = isset($attr['limit']) ? $attr['limit'] : '';
+
+		$str = '<?php ';
+		$str .= '$where = array("pid" => 0);';
+		$str .= '$_topcatesResult = M("category")->where($where)->limit(' . $limit .')->select();';
+		$str .= 'foreach ($_topcatesResult as $v) : ';
+		$str .= 'extract($v);?>';
+		$str .= $content;
+		$str .= '<?php endforeach;?>';
+		
+
+		return $str;
+	}
+
+}
+
+
+?>
