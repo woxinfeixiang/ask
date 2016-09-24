@@ -115,7 +115,7 @@
 		</div>
 		<div class='login-form'>
 			<span id='login-msg'></span>
-			<form action="<?php echo U('Common:login');?>" method='post' name='login'>
+			<form action="<?php echo U('Common/login');?>" method='post' name='login'>
 				<ul>
 					<li>
 						<label for="login-acc">账号</label>

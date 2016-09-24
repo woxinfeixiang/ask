@@ -10,11 +10,38 @@ Class CommonAction extends Action {
 		}
 	}
 
+	//登录表单处理
+	Public function login () {
+		if (!$this->isPost()) halt('页面不存在');
+
+		$db = M('user');
+		$where = array('account' => $this->_post('account'));
+		$field = array('id', 'username', 'password', 'logintime', 'lock');
+		$user = $db->where($where)->field($field)->find();
+
+		if (!$user || $user['password'] != $this->_post('pwd', 'md5')) {
+			$this->error('账号或密码错误');
+		}
+
+		if ($user['lock']) {
+			$this->error('账号被锁定');
+		}
+
+		if (isset($_POST['auto'])) {
+			$value = $user['id'] . '|' . get_client_ip() . '|' . $user['username'];
+
+			$value = encrytion($value, 1);
+			@setcookie('auto', $value, C('AUTO_LOGIN_LIFETIME'), '/');
+
+		}		
+
+	}
+
 	//异步验证登录账号与密码
 	Public function checkLogin () {
 		if (!$this->isAjax()) halt('页面不存在');
 
-		$account = $this->_post['account'];
+		$account = $this->_post('account');
 		$where = array('account' => $account);
 
 		$pwd = M('user')->where($where)->getField('password');
