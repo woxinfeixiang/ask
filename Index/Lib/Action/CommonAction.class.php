@@ -18,7 +18,7 @@ Class CommonAction extends Action {
 				session('username', $value[2]);
 			}
 		}
-		p($_SESSION);
+		
 	}
 
 	//登录表单处理

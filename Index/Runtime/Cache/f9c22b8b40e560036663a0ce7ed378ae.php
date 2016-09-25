@@ -19,11 +19,18 @@
 			<li><a href="http://bbs.houdunwang.com" target='_blank'>后盾论坛</a></li>
 			<li><a href="http://study.houdunwang.com" target='_blank'>后盾学习社区</a></li>
 		</ul> -->
+		
 		<ul class='top-bar-right fr'>
-			<li><a href="" class='login'>登录</a></li>
+			<?php if(!isset($_SESSION["uid"]) OR !isset($_SESSION["username"])): ?><li><a href="" class='login'>登录</a></li>
 				<li style='color:#eaeaf1'>|</li>
 				<li><a href="" class='register'>注册</a></li>
-					</ul>
+			<?php else: ?>
+				<li class="userinfo">
+					<a href="<?php echo U('Member/index', array('id' => $_SESSION['uid']));?>" class="uname"><?php echo ($_SESSION['username']); ?></a>
+				</li>
+				<li style='color:#eaeaf1'>|</li>			
+				<li><a href="">退出</a></li><?php endif; ?>
+		</ul>
 	</div>
 
 	<div id='search'>
@@ -214,12 +221,42 @@
 							</dl>
 
 		</div>
-
 		<div id='right'>
-	<div class='r-login'>
-			<span class='login'><i></i>&nbsp;登录</span>
-			<span class='register'><i></i>&nbsp;注册</span>
+	<?php if(!isset($_SESSION["uid"]) OR !isset($_SESSION["username"])): ?><div class='r-login'>
+				<span class='login'><i></i>&nbsp;登录</span>
+				<span class='register'><i></i>&nbsp;注册</span>
 		</div>
+	<?php else: ?>	
+		<?php
+ $field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp'); $_userinfoResult = M('user')->field($field)->find($_SESSION["uid"]); p($_userinfoResult); ?><div class='userinfo'>
+			<dl>
+				<dt>
+					<a href=""><img src="" width='48' height='48'/></a>
+				</dt>
+				<dd class='username'>
+					<a href=""><b></b><i class='level lv2' title='Level 2'></i></a>
+				</dd>
+				<dd>金币：<a href="" style="color: #888888;"><b class='point'>0</b></a></dd>
+				<dd>经验值：11</dd>
+			</dl>
+			<table>
+				<tr>
+					<td>回答数</td>
+					<td>采纳率</td>
+					<td class='last'>提问数</td>
+				</tr>
+				<tr>
+					<td><a href="">0</a></td>
+					<td><a href="">0%</a></td>
+					<td class='last'><a href="">0</a></td>
+				</tr>
+			</table>
+			<ul>
+				<li><a href="">我提问的</a></li>
+				<li><a href="">我回答的</a></li>
+			</ul>
+		</div><?php endif; ?>
+
 	
 	<div class='clear'></div>
 	<div class='star'>
@@ -255,8 +292,8 @@
 	</div>
 
 
-		<div class='star-list'>
-		<p class='title'>后盾问答助人光荣榜</p>
+	<div class='star-list'>
+	<p class='title'>后盾问答助人光荣榜</p>
 		<div>
 			<ul class='ul-title'>
 				<li>用户名</li>
@@ -264,12 +301,31 @@
 			</ul>
 			<ul class='ul-list'>
 				<li>
-						<a href="/wenda/index.php/Member/index/id/1"><i class='rank r1'></i>admin</a>
-						<span>0</span>
-					</li>			</ul>
+					<a href="/wenda/index.php/Member/index/id/6"><i class='rank r1'></i>后端12</a>
+					<span>0</span>
+				</li>
+				<li>
+					<a href="/wenda/index.php/Member/index/id/3"><i class='rank r2'></i>后端</a>
+					<span>0</span>
+				</li>
+				<li>
+					<a href="/wenda/index.php/Member/index/id/4"><i class='rank r3'></i>测试00011</a>
+					<span>0</span>
+				</li>
+				<li>
+					<a href="/wenda/index.php/Member/index/id/5"><i class='rank r4'></i>test002</a>
+					<span>0</span>
+				</li>
+				<li>
+					<a href="/wenda/index.php/Member/index/id/1"><i class='rank r5'></i>admin</a>
+					<span>0</span>
+				</li>			
+			</ul>
 		</div>
 	</div>
 </div>
+
+	
 	</div>
 <!--------------------内容主体结束-------------------->
 	<div class='clear'></div>

@@ -1,0 +1,106 @@
+<div id='right'>
+	<if condition='!isset($_SESSION["uid"]) OR !isset($_SESSION["username"])'>
+		<div class='r-login'>
+				<span class='login'><i></i>&nbsp;登录</span>
+				<span class='register'><i></i>&nbsp;注册</span>
+		</div>
+	<else/>	
+		<userinfo uid='$_SESSION["uid"]'>		
+		<div class='userinfo'>
+			<dl>
+				<dt>
+					<a href=""><img src="" width='48' height='48'/></a>
+				</dt>
+				<dd class='username'>
+					<a href=""><b></b><i class='level lv2' title='Level 2'></i></a>
+				</dd>
+				<dd>金币：<a href="" style="color: #888888;"><b class='point'>0</b></a></dd>
+				<dd>经验值：11</dd>
+			</dl>
+			<table>
+				<tr>
+					<td>回答数</td>
+					<td>采纳率</td>
+					<td class='last'>提问数</td>
+				</tr>
+				<tr>
+					<td><a href="">0</a></td>
+					<td><a href="">0%</a></td>
+					<td class='last'><a href="">0</a></td>
+				</tr>
+			</table>
+			<ul>
+				<li><a href="">我提问的</a></li>
+				<li><a href="">我回答的</a></li>
+			</ul>
+		</div>
+		</userinfo>
+	</if>
+
+	
+	<div class='clear'></div>
+	<div class='star'>
+		<p class='title'>后盾问答之星</p>
+		<span class='star-name'>本日回答问题最多的人</span>
+					<div class='star-info'>
+				<div>
+					<a href="/wenda/index.php/Member/index/" class='star-face'><img src="/wenda/Public/Images/noface.gif" width='48px' height='48px'/></a>
+					<ul>
+						<li><a href="/wenda/index.php/Member/index/"></a></li>
+						<li><i class='level lv1' title='Level 1'></i></li>
+					</ul>
+				</div>
+				<ul class='star-count'>
+					<li>回答数：<span></span></li>
+					<li>采纳率：<span>0%</span></li>
+				</ul>
+			</div>
+		<span class='star-name'>历史回答问题最多的人</span>
+				<div class='star-info'>
+			<div>
+				<a href="/wenda/index.php/Member/index/" class='star-face'><img src="/wenda/Public/Images/noface.gif" width='48px' height='48px'/></a>
+				<ul>
+					<li><a href="/wenda/index.php/Member/index/"></a></li>
+					<li><i class='level lv1' title='Level 1'></i></li>
+				</ul>
+			</div>
+			<ul class='star-count'>
+				<li>回答数：<span></span></li>
+				<li>采纳率：<span>0%</span></li>
+			</ul>
+		</div>
+	</div>
+
+
+	<div class='star-list'>
+	<p class='title'>后盾问答助人光荣榜</p>
+		<div>
+			<ul class='ul-title'>
+				<li>用户名</li>
+				<li style='text-align:right;'>帮助过的人数</li>
+			</ul>
+			<ul class='ul-list'>
+				<li>
+					<a href="/wenda/index.php/Member/index/id/6"><i class='rank r1'></i>后端12</a>
+					<span>0</span>
+				</li>
+				<li>
+					<a href="/wenda/index.php/Member/index/id/3"><i class='rank r2'></i>后端</a>
+					<span>0</span>
+				</li>
+				<li>
+					<a href="/wenda/index.php/Member/index/id/4"><i class='rank r3'></i>测试00011</a>
+					<span>0</span>
+				</li>
+				<li>
+					<a href="/wenda/index.php/Member/index/id/5"><i class='rank r4'></i>test002</a>
+					<span>0</span>
+				</li>
+				<li>
+					<a href="/wenda/index.php/Member/index/id/1"><i class='rank r5'></i>admin</a>
+					<span>0</span>
+				</li>			
+			</ul>
+		</div>
+	</div>
+</div>

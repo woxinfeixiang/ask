@@ -5,11 +5,20 @@
 			<li><a href="http://bbs.houdunwang.com" target='_blank'>后盾论坛</a></li>
 			<li><a href="http://study.houdunwang.com" target='_blank'>后盾学习社区</a></li>
 		</ul> -->
+		
 		<ul class='top-bar-right fr'>
-			<li><a href="" class='login'>登录</a></li>
+			<if condition='!isset($_SESSION["uid"]) OR !isset($_SESSION["username"])'>
+				<li><a href="" class='login'>登录</a></li>
 				<li style='color:#eaeaf1'>|</li>
 				<li><a href="" class='register'>注册</a></li>
-					</ul>
+			<else/>
+				<li class="userinfo">
+					<a href="{:U('Member/index', array('id' => $_SESSION['uid']))}" class="uname">{$Think.session.username}</a>
+				</li>
+				<li style='color:#eaeaf1'>|</li>			
+				<li><a href="">退出</a></li>
+			</if>
+		</ul>
 	</div>
 
 	<div id='search'>

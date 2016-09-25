@@ -8,6 +8,7 @@ Class TagLibHd extends TagLib {
 	//自定义标签
 	Protected $tags = array(
 		'topcates' => array('attr' => 'limit'),
+		'userinfo' => array('attr' => 'uid')
 	);
 
 	//顶级分类对标签
@@ -24,6 +25,21 @@ Class TagLibHd extends TagLib {
 		$str .= '<?php endforeach;?>';
 		
 
+		return $str;
+	}
+
+	//读取用户信息
+	Public function _userinfo ($attr, $content) {
+		$attr = $this->parseXmlAttr($attr);
+		$uid = $attr['uid'];
+		$str = <<<str
+<?php
+	\$field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp');
+	\$_userinfoResult = M('user')->field(\$field)->find({$uid});
+	p(\$_userinfoResult);
+?>
+str;
+		$str .= $content;
 		return $str;
 	}
 
