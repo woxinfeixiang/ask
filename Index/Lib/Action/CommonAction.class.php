@@ -8,6 +8,17 @@ Class CommonAction extends Action {
 		if (!C('WEB_STATE')) {
 			halt("网站维护中");
 		}
+
+		//自动登录处理
+		if (isset($_COOKIE['auto']) && !isset($_SESSION['uid'])) {
+			$value = explode('|', encrytion($_COOKIE['auto']));
+			
+			if ($value[1] == get_client_ip()) {
+				session('uid', $value[0]);
+				session('username', $value[2]);
+			}
+		}
+		p($_SESSION);
 	}
 
 	//登录表单处理
@@ -33,8 +44,21 @@ Class CommonAction extends Action {
 			$value = encrytion($value, 1);
 			@setcookie('auto', $value, C('AUTO_LOGIN_LIFETIME'), '/');
 
-		}		
+		}
 
+		//每天登陆增加经验
+		$today = strtotime(date('Y-m-d'));		
+		$where = array('id' => $user['id']);
+		if ($user['logintime'] < $today) {
+			$db->where($where)->setInc('exp', C('LV_LOGIN'));
+		}
+
+		//更新登陆时间
+		$db->where($where)->save(array('logintime' => time()));
+
+		session('uid', $user['id']);
+		session('username', $user['username']);
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 	//异步验证登录账号与密码

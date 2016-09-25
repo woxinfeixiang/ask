@@ -13,7 +13,7 @@ return array (
   'DEL_ADOPT_ASK' => 3,
   'DEL_ADOPT_ANSWER' => '3',
   'DEL_ADOPT' => '21',
-  'LV_LOGIN' => '11',
+  'LV_LOGIN' => '1',
   'LV_ASK' => '11',
   'LV_ANSWER' => '22',
   'LV_ADOPT' => '3',
