@@ -1,0 +1,38 @@
+<include file='Common:header'/>
+	<link rel="stylesheet" href="__PUBLIC__/Css/member.css" />
+</head>
+<body>
+<include file='Common:top' />
+<!--背景遮罩--><div id='background' class='hidden'></div>
+<!--------------------中部-------------------->
+	<div id='center'>
+		<include file='Common:mleft' />
+		<div id='right'>
+			<p class='title'>我的首页</p>
+			<ul class='property'>
+				<li>金币：<span>{$msg.point}</span></li>
+				<li>经验值：<span>{$msg.exp}</span></li>
+				<li>采纳率：<span>{:floor($msg['adopt'] / $msg['answer'])}%</span></li>
+			</ul>
+			<div class='list'>
+				<p><span>我的提问 <b>(共{$msg.ask}条)</b></span><a href="">更多>></a></p>
+				<table>
+					<tr height='140'>
+							<td>你还没有进行过提问</td>
+						</tr>
+									</table>
+			</div>
+			<div class='list'>
+				<p><span>我的回答 <b>(共{$msg.answer}条)</b></span><a href="">更多>></a></p>
+				<table>
+					<tr height='140'>
+							<td>你还没有进行过回答</td>
+						</tr>
+									</table>
+			</div>
+		</div>
+	</div>
+<!--------------------中部结束-------------------->
+
+<!--------------------底部-------------------->
+<include file='Common:bottom' />

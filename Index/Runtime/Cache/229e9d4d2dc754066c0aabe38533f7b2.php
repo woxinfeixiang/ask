@@ -8,11 +8,10 @@
 	<link rel="stylesheet" href="__PUBLIC__/Css/common.css" />
 	<script type="text/javascript" src='__PUBLIC__/Js/jquery-1.7.2.min.js'></script>
 	<script type="text/javascript" src='__PUBLIC__/Js/top-bar.js'></script>
-	<link rel="stylesheet" href="__PUBLIC__/Css/index.css" />
-	<script type="text/javascript" src='__PUBLIC__/Js/index.js'></script>
+	<link rel="stylesheet" href="__PUBLIC__/Css/member.css" />
 </head>
 <body>
-	<div id='top-fixed'>
+<div id='top-fixed'>
 	<div id='top-bar'>
 		<!-- <ul class="top-bar-left fl">
 			<li><a href="http://www.houdunwang.com" target='_blank'>后盾网</a></li>
@@ -146,100 +145,20 @@
 		</div>
 	</div>
 <!--背景遮罩--><div id='background' class='hidden'></div>
-<!--------------------内容主体-------------------->
-	<div class='main'>
+<!--背景遮罩--><div id='background' class='hidden'></div>
+<!--------------------中部-------------------->
+	<div id='center'>
 		<div id='left'>
-			<p class='left-title'>所有问题分类</p>
-			<ul class='left-list'>
-				<li class='list-l1'>
-					<div class='list-l1-wrap'>
-						<h4><a href="/wenda/index.php/List/index/id/31">问答系统</a></h4>
-						<ul class='list-l2'>
-							<li><a href="/wenda/index.php/List/index/id/33">安装</a></li><li><a href="/wenda/index.php/List/index/id/32">使用</a></li><li><a href="/wenda/index.php/List/index/id/40">手机版</a></li>						</ul>
-					</div>
-					<div class='list-more hidden'>
-						<ul>
-							<li><a href="/wenda/index.php/List/index/id/41">升级</a></li><li><a href="/wenda/index.php/List/index/id/43">BUG</a></li>						</ul>
-					</div>
-				</li><li class='list-l1'>
-					<div class='list-l1-wrap'>
-						<h4><a href="/wenda/index.php/List/index/id/25">开发</a></h4>
-						<ul class='list-l2'>
-							<li><a href="/wenda/index.php/List/index/id/28">开发设计</a></li><li><a href="/wenda/index.php/List/index/id/27">开发建议</a></li><li><a href="/wenda/index.php/List/index/id/26">开发功能</a></li>						</ul>
-					</div>
-					<div class='list-more hidden'>
-						<ul>
-							<li><a href="/wenda/index.php/List/index/id/42">开发费用</a></li>						</ul>
-					</div>
-				</li><li class='list-l1'>
-					<div class='list-l1-wrap'>
-						<h4><a href="/wenda/index.php/List/index/id/44">技术相关</a></h4>
-						<ul class='list-l2'>
-							<li><a href="/wenda/index.php/List/index/id/47">css</a></li><li><a href="/wenda/index.php/List/index/id/46">javascript</a></li><li><a href="/wenda/index.php/List/index/id/45">PHP</a></li>						</ul>
-					</div>
-					<div class='list-more hidden'>
-						<ul>
-							<li><a href="/wenda/index.php/List/index/id/48">python</a></li><li><a href="/wenda/index.php/List/index/id/49">perl</a></li>						</ul>
-					</div>
-				</li>			</ul>
-		</div>
-
-		<div id='center'>
-			<div id='animate'>
-				<div class='imgs-wrap'>
-					<ul>
-						<li>
-							<a href=""><img src="/wenda/Public/Images/animate1.png" width='558' height='190'/></a>
-						</li>
-						<li>
-							<a href=""><img src="/wenda/Public/Images/animate2.png" width='558' height='190'/></a>
-						</li>
-						<li>
-							<a href=""><img src="/wenda/Public/Images/animate3.png" width='558' height='190'/></a>
-						</li>
-					</ul>
-				</div>
-				<ul class='ani-btn'>
-					<li class='ani-btn-cur'>后盾网<i></i></li>
-					<li>后盾网论坛<i></i></li>
-					<li style='border:none'>后盾网学习社区<i></i></li>
-				</ul>
-			</div>
-
-			<dl class='answer-list'>
-				<dt>
-					<span class='wait-as'>待解决问题</span>
-					<a href=''>更多>></a>
-				</dt>
-							</dl>
-
-			<dl class='answer-list'>
-				<dt>
-					<span class='reward-as'>高分悬赏问题</span>
-					<a href=''>更多>></a>
-				</dt>
-							</dl>
-
-		</div>
-		<div id='right'>
-	<?php if(!isset($_SESSION["uid"]) OR !isset($_SESSION["username"])): ?><div class='r-login'>
-				<span class='login'><i></i>&nbsp;登录</span>
-				<span class='register'><i></i>&nbsp;注册</span>
-		</div>
-	<?php else: ?>	
-		<?php
- $field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp'); $_userinfoResult = M('user')->field($field)->find($_SESSION["uid"]); extract($_userinfoResult); $face = empty($face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . $face; $adopt = floor($adopt / $answer) . '%'; $face = __ROOT__ . $face; $level = exp_to_level($exp); ?><div class='userinfo'>
+	<?php
+ $field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp'); $_userinfoResult = M('user')->field($field)->find($_SESSION["uid"]); extract($_userinfoResult); $face = empty($face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . $face; $adopt = floor($adopt / $answer) . '%'; $face = __ROOT__ . $face; $level = exp_to_level($exp); ?><div class='userinfo' >
 			<dl>
 				<dt>
 					<a href="<?php echo U('Member/index', array('id' => $id));?>"><img src="<?php echo ($face); ?>" width='48' height='48'/></a>
 				</dt>
 				<dd class='username'>
-					<a href="<?php echo U('Member/index', array('id' => $id));?>">
-					<b><?php echo ($username); ?></b>
-					<i class='level lv<?php echo ($level); ?>' title='Level <?php echo ($level); ?>'></i>
-					</a>
+					<a href="<?php echo U('Member/index', array('id' => $id));?>"><b><?php echo ($username); ?></b><i class='level lv2' title='Level <?php echo ($level); ?>'></i></a>
 				</dd>
-				<dd>金币：<a href="" style="color: #888888;"><b class='point'><?php echo ($point); ?></b></a></dd>
+				<dd>金币：<a href="" style="color: #888888;"><b class='point'>0</b></a></dd>
 				<dd>经验值：<?php echo ($exp); ?></dd>
 			</dl>
 			<table>
@@ -254,83 +173,54 @@
 					<td class='last'><a href=""><?php echo ($ask); ?></a></td>
 				</tr>
 			</table>
-			<ul>
-				<li><a href="">我提问的</a></li>
-				<li><a href="">我回答的</a></li>
-			</ul>
-		</div><?php endif; ?>
-
-	
-	<div class='clear'></div>
-	<div class='star'>
-		<p class='title'>后盾问答之星</p>
-		<span class='star-name'>本日回答问题最多的人</span>
-					<div class='star-info'>
-				<div>
-					<a href="/wenda/index.php/Member/index/" class='star-face'><img src="/wenda/Public/Images/noface.gif" width='48px' height='48px'/></a>
-					<ul>
-						<li><a href="/wenda/index.php/Member/index/"></a></li>
-						<li><i class='level lv1' title='Level 1'></i></li>
-					</ul>
-				</div>
-				<ul class='star-count'>
-					<li>回答数：<span></span></li>
-					<li>采纳率：<span>0%</span></li>
-				</ul>
-			</div>
-		<span class='star-name'>历史回答问题最多的人</span>
-				<div class='star-info'>
-			<div>
-				<a href="/wenda/index.php/Member/index/" class='star-face'><img src="/wenda/Public/Images/noface.gif" width='48px' height='48px'/></a>
-				<ul>
-					<li><a href="/wenda/index.php/Member/index/"></a></li>
-					<li><i class='level lv1' title='Level 1'></i></li>
-				</ul>
-			</div>
-			<ul class='star-count'>
-				<li>回答数：<span></span></li>
-				<li>采纳率：<span>0%</span></li>
-			</ul>
 		</div>
-	</div>
-
-
-	<div class='star-list'>
-	<p class='title'>后盾问答助人光荣榜</p>
-		<div>
-			<ul class='ul-title'>
-				<li>用户名</li>
-				<li style='text-align:right;'>帮助过的人数</li>
-			</ul>
-			<ul class='ul-list'>
-				<li>
-					<a href="/wenda/index.php/Member/index/id/6"><i class='rank r1'></i>后端12</a>
-					<span>0</span>
-				</li>
-				<li>
-					<a href="/wenda/index.php/Member/index/id/3"><i class='rank r2'></i>后端</a>
-					<span>0</span>
-				</li>
-				<li>
-					<a href="/wenda/index.php/Member/index/id/4"><i class='rank r3'></i>测试00011</a>
-					<span>0</span>
-				</li>
-				<li>
-					<a href="/wenda/index.php/Member/index/id/5"><i class='rank r4'></i>test002</a>
-					<span>0</span>
-				</li>
-				<li>
-					<a href="/wenda/index.php/Member/index/id/1"><i class='rank r5'></i>admin</a>
-					<span>0</span>
-				</li>			
-			</ul>
-		</div>
-	</div>
+	<ul>
+		<li class='myhome cur'>
+			<a href="/wenda/index.php/Member/index/id/6">我的首页</a>
+		</li>
+		<li class='myask '>
+			<a href="/wenda/index.php/Member/myAsk/id/6">我的提问</a>
+		</li>
+		<li class='myanswer '>
+			<a href="/wenda/index.php/Member/myAnswer/id/6">我的回答</a>
+		</li>
+		<li class='mylevel '>
+			<a href="/wenda/index.php/Member/myLevel/id/6">我的等级</a>
+		</li>
+		<li class='mypoint '>
+			<a href="/wenda/index.php/Member/myPoint/id/6">我的金币</a>
+		</li>
+		<li style="background:none"></li>
+	</ul>
 </div>
-
-	
+		<div id='right'>
+			<p class='title'>我的首页</p>
+			<ul class='property'>
+				<li>金币：<span><?php echo ($msg["point"]); ?></span></li>
+				<li>经验值：<span><?php echo ($msg["exp"]); ?></span></li>
+				<li>采纳率：<span><?php echo floor($msg['adopt'] / $msg['answer']);?>%</span></li>
+			</ul>
+			<div class='list'>
+				<p><span>我的提问 <b>(共<?php echo ($msg["ask"]); ?>条)</b></span><a href="">更多>></a></p>
+				<table>
+					<tr height='140'>
+							<td>你还没有进行过提问</td>
+						</tr>
+									</table>
+			</div>
+			<div class='list'>
+				<p><span>我的回答 <b>(共<?php echo ($msg["answer"]); ?>条)</b></span><a href="">更多>></a></p>
+				<table>
+					<tr height='140'>
+							<td>你还没有进行过回答</td>
+						</tr>
+									</table>
+			</div>
+		</div>
 	</div>
-<!--------------------内容主体结束-------------------->
+<!--------------------中部结束-------------------->
+
+<!--------------------底部-------------------->
 	<div class='clear'></div>
 	<div id='bottom'>
 		<p><?php echo (C("copy")); ?></p>

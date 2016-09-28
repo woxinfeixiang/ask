@@ -21,6 +21,13 @@ Class CommonAction extends Action {
 		
 	}
 
+	//退出登录
+	Public function logout () {
+		session_unset();
+		session_destroy();
+		redirect(__APP__);
+	}
+
 	//登录表单处理
 	Public function login () {
 		if (!$this->isPost()) halt('页面不存在');

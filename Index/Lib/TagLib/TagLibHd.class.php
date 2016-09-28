@@ -36,7 +36,11 @@ Class TagLibHd extends TagLib {
 <?php
 	\$field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp');
 	\$_userinfoResult = M('user')->field(\$field)->find({$uid});
-	p(\$_userinfoResult);
+	extract(\$_userinfoResult);
+	\$face = empty(\$face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . \$face;
+	\$adopt = floor(\$adopt / \$answer) . '%';
+	\$face = __ROOT__ . \$face;
+	\$level = exp_to_level(\$exp);
 ?>
 str;
 		$str .= $content;

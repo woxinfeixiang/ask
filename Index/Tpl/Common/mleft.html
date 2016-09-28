@@ -1,0 +1,46 @@
+<div id='left'>
+	<userinfo uid='$_SESSION["uid"]'>
+	<div class='userinfo' >
+			<dl>
+				<dt>
+					<a href="{:U('Member/index', array('id' => $id))}"><img src="{$face}" width='48' height='48'/></a>
+				</dt>
+				<dd class='username'>
+					<a href="{:U('Member/index', array('id' => $id))}"><b>{$username}</b><i class='level lv2' title='Level {$level}'></i></a>
+				</dd>
+				<dd>金币：<a href="" style="color: #888888;"><b class='point'>0</b></a></dd>
+				<dd>经验值：{$exp}</dd>
+			</dl>
+			<table>
+				<tr>
+					<td>回答数</td>
+					<td>采纳率</td>
+					<td class='last'>提问数</td>
+				</tr>
+				<tr>
+					<td><a href="">{$answer}</a></td>
+					<td><a href="">{$adopt}</a></td>
+					<td class='last'><a href="">{$ask}</a></td>
+				</tr>
+			</table>
+		</div>
+		</userinfo>
+	<ul>
+		<li class='myhome cur'>
+			<a href="/wenda/index.php/Member/index/id/6">我的首页</a>
+		</li>
+		<li class='myask '>
+			<a href="/wenda/index.php/Member/myAsk/id/6">我的提问</a>
+		</li>
+		<li class='myanswer '>
+			<a href="/wenda/index.php/Member/myAnswer/id/6">我的回答</a>
+		</li>
+		<li class='mylevel '>
+			<a href="/wenda/index.php/Member/myLevel/id/6">我的等级</a>
+		</li>
+		<li class='mypoint '>
+			<a href="/wenda/index.php/Member/myPoint/id/6">我的金币</a>
+		</li>
+		<li style="background:none"></li>
+	</ul>
+</div>

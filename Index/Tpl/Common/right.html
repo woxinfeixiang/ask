@@ -9,13 +9,16 @@
 		<div class='userinfo'>
 			<dl>
 				<dt>
-					<a href=""><img src="" width='48' height='48'/></a>
+					<a href="{:U('Member/index', array('id' => $id))}"><img src="{$face}" width='48' height='48'/></a>
 				</dt>
 				<dd class='username'>
-					<a href=""><b></b><i class='level lv2' title='Level 2'></i></a>
+					<a href="{:U('Member/index', array('id' => $id))}">
+					<b>{$username}</b>
+					<i class='level lv{$level}' title='Level {$level}'></i>
+					</a>
 				</dd>
-				<dd>金币：<a href="" style="color: #888888;"><b class='point'>0</b></a></dd>
-				<dd>经验值：11</dd>
+				<dd>金币：<a href="" style="color: #888888;"><b class='point'>{$point}</b></a></dd>
+				<dd>经验值：{$exp}</dd>
 			</dl>
 			<table>
 				<tr>
@@ -24,9 +27,9 @@
 					<td class='last'>提问数</td>
 				</tr>
 				<tr>
-					<td><a href="">0</a></td>
-					<td><a href="">0%</a></td>
-					<td class='last'><a href="">0</a></td>
+					<td><a href="">{$answer}</a></td>
+					<td><a href="">{$adopt}</a></td>
+					<td class='last'><a href="">{$ask}</a></td>
 				</tr>
 			</table>
 			<ul>
