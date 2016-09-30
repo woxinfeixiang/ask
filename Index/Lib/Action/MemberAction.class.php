@@ -11,7 +11,14 @@ Class MemberAction extends CommonAction {
 			redirect(__APP__);
 			die();
 		}
-		$this->msg = $msg;
+		$this->msg = $msg;	
+		
+
+
+		//我的提问
+		$where = array('uid' => $id);
+		$this->myAsk = D('AskView')->where($where)->order('time DESC')->limit(10)->select();
+		
 		$this->display();
 	}
 }

@@ -15,12 +15,29 @@
 				<li>采纳率：<span>{:floor($msg['adopt'] / $msg['answer'])}%</span></li>
 			</ul>
 			<div class='list'>
-				<p><span>我的提问 <b>(共{$msg.ask}条)</b></span><a href="">更多>></a></p>
+				<p><span>我的提问 <b>(共{$msg.ask}条)</b></span><a href="">更多></a></p>
 				<table>
-					<tr height='140'>
+					<if condition="!$myAsk">
+						<tr height='140'>
 							<td>你还没有进行过提问</td>
 						</tr>
-									</table>
+					<else/>
+						<tr>
+							<th class='t1'>标题</th>
+							<th>回答</th>
+							<th class='t3'>更新时间</th>
+						</tr>
+						<foreach name='myAsk' item='v'>
+						<tr>
+							<td class='t1'>
+								<a href="">{$v.content}</a><span>&nbsp;[{$v.name}]</span>
+							</td>
+							<td>{$v.answer}</td>
+							<td class='t3'>{$v.time|time_format=###}</td>
+						</tr>
+						</foreach>
+					</if>		
+				</table>
 			</div>
 			<div class='list'>
 				<p><span>我的回答 <b>(共{$msg.answer}条)</b></span><a href="">更多>></a></p>

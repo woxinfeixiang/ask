@@ -20,6 +20,42 @@ function encrytion ($value, $type=0) {
 }
 
 /**
+ * 格式化时间字符串
+ * @param  [type] $time [description]
+ * @return [type]       [description]
+ */
+function time_format ($time) {
+	$now = time();
+	$today = strtotime(date('y-m-d'));
+	$yestoday = strtotime('-1 day', $today);
+
+	$diff = $now - $time;
+
+	$str = '';
+	switch (true) {
+		case $diff < 60:
+			$str = '刚刚';
+			break;
+		case $diff < 3600:
+			$str = floor($diff / 60) . '分钟前';
+			break;
+		case $diff < (3600 * 8):
+			$str = floor($diff / 3600) . '小时前';
+			break;
+		case $time > $today:
+			$str = '今天' . date('H:i', $time);
+			break;
+		case $time > $yestoday:
+			$str = '昨天' .  date('H:i', $time);
+			break;
+		default :
+			$str = date('Y-m-d H:i', $time);	
+	}
+
+	return $str;
+}
+
+/**
  * 经验值转换为等级
  * @param  [type] $exp [description]
  * @return [type]      [description]

@@ -14,7 +14,7 @@
 <body>
 	<include file="Common:top" />
 	<div id='location'>
-		<a href="">后盾问答</a>&nbsp;>&nbsp;提问
+		<a href="__APP__">问答</a>&nbsp;>&nbsp;提问
 	</div>
 
 <!--------------------中部-------------------->
@@ -24,7 +24,7 @@
 				<p class='left'>请输入提问内容</p>
 				<p class='right'>您还可以输入<span id='num'>50</span>个字</p>
 			</div>
-			<form action="" method='post'>
+			<form action="{:U('Ask/send')}" method='post'>
 				<div class='cons'>
 					<textarea name="content"></textarea>
 				</div>

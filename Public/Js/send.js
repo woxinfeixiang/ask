@@ -17,10 +17,18 @@ $(function () {
 		$( '#num' ).html( msg );
 	} );
 
+	var opt = $( 'select[name=reward] option' );
+	for (var i = 0; i < opt.length; i++){
+		if (opt.eq(i).val() > point) {
+			opt.eq(i).attr('disabled', 'disabled');
+		}
+	}
+
+
 
 	//选择分类
 	var cateID = 0;
-	$( 'select' ).change( function()  {
+	$( 'select[name=cate-one]' ).change( function()  {
 		var obj = $( this );
 
 		if (obj.index() < 3) {

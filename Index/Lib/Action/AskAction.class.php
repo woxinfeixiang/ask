@@ -26,6 +26,30 @@ Class AskAction extends CommonAction {
 			echo 0;
 		}
 	}
+
+	//发布表单处理
+	Public function send () {
+		if(!$this->isPost()) halt('页面不存在');
+		
+		$data = array (
+			content => $this->_post('content'),
+			reward  => $this->_post('reward', 'intval'),
+			time => time(),
+			uid => session('uid'),
+			cid => $this->_post('cid', 'intval')
+		);
+
+		if (M('ask')->data($data)->add()) {
+			$where = array('id' => session('uid'));
+			$db = M('user');
+			$db->where($where)->setInc('ask');
+			$db->where($where)->setInc('exp', C('LV_ASK'));
+
+			redirect(U('Member/index', array('id' => session('uid'))));
+		}else {
+			$this->error('提交失败, 请重试');
+		}
+	}
 }  
 
 
