@@ -17,17 +17,10 @@ $(function () {
 		$( '#num' ).html( msg );
 	} );
 
-	var opt = $( 'select[name=reward] option' );
-	for (var i = 0; i < opt.length; i++) {
-		if (opt.eq(i).val() > point) {
-			opt.eq(i).attr('disabled', 'disabled');
-		}
-	}
-
 
 	//选择分类
 	var cateID = 0;
-	$( 'select[name=cate-one]' ).change( function () {
+	$( 'select' ).change( function()  {
 		var obj = $( this );
 
 		if (obj.index() < 3) {
@@ -35,44 +28,58 @@ $(function () {
 			$.getJSON(getCate, {pid : pid}, function (data) {
 				if (data) {
 					var option = '';
-					$.each(data, function (i, k) {
+					$.each(data, function(i, k) {
 						option += '<option value="' + k.id + '">' + k.name + '</option>';
 					});
-					obj.next().html(option).show();
-				}
+					obj.next().html(option).show(); 
+				}	
 			}, 'json');
 		}
 
 		cateID = obj.val();
-	} );
+	});
 
-	$( '#ok' ).click( function () {
+	$( '#ok' ).click ( function () {
 		if (!cateID) {
 			alert('请选择一个分类');
 			return;
 		}
 		$( 'input[name=cid]' ).val(cateID);
 		$( '.close-window' ).click();
-	} );
-
+	})
+	
 	$( '.send-btn' ).click( function () {
+
+			//提示登录
+		if (!on) {
+			$( '.login' ).click();
+			return false;
+		}
+
 		var cons = $( 'textarea[name=content]' );
+
+
+
 		if (cons.val() == '') {
 			alert('请输入提问内容');
 			cons.focus();
 			return false;
 		}
 
+
 		if (!cateID) {
 			alert('请选择一个分类');
 			return false;
 		}
 
-		if (!on) {
-			$( '.login' ).click();
-			return false;
-		}
-	} );
+
+	})
+
+	
+
+	
+
+
 
 });
 

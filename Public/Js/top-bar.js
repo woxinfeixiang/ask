@@ -22,6 +22,14 @@ $(function () {
 		$( this ).removeClass( 'ask-btn-cur' );
 	} );
 
+	//点击提问按钮时，增加登录验证
+	$( '.ask-btn' ).click( function () {
+		if (!on_ask) {
+			$( '.login' ).click();
+			return false;
+		}
+	})
+
 
 	//注册出弹框
 	$( '.register' ).click( function () {

@@ -20,14 +20,20 @@
 			</if>
 		</ul>
 	</div>
-
+	<!-- 点击提交按钮时，验证是否登录 -->
+	<script>
+		var on_ask = false;
+		<if condition='isset($_SESSION["uid"]) && isset($_SESSION["username"])'>
+			on_ask = true;
+		</if>
+	</script>
 	<div id='search'>
 		<div class='logo'></div>
 		<form action="" method=''>
 			<input type="text" name='' class='sech-cons'/>
 			<input type="submit" class='sech-btn'/>
 		</form>
-		<a href="/wd/index.php/Ask/index" class='ask-btn'></a>
+		<a href="{:U('Ask/index')}" class='ask-btn'></a>
 	</div>
 </div>
 <div style='height:110px'></div>
@@ -107,7 +113,7 @@
 	<!----------登录框---------->	
 	<div id='login' class='hidden'>
 		<div class='login-title'>
-			<p>欢迎您登录后盾网</p>
+			<p>欢迎您登录</p>
 			<a href="" title='关闭' class='close-window'></a>
 		</div>
 		<div class='login-form'>
