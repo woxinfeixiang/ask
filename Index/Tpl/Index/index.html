@@ -9,37 +9,26 @@
 		<div id='left'>
 			<p class='left-title'>所有问题分类</p>
 			<ul class='left-list'>
+			<foreach name='cate' item='v'>
 				<li class='list-l1'>
 					<div class='list-l1-wrap'>
-						<h4><a href="/wenda/index.php/List/index/id/31">问答系统</a></h4>
+						<h4><a href="{:U('List/index', array('id' => $v['id']))}">{$v.name}</a></h4>
 						<ul class='list-l2'>
-							<li><a href="/wenda/index.php/List/index/id/33">安装</a></li><li><a href="/wenda/index.php/List/index/id/32">使用</a></li><li><a href="/wenda/index.php/List/index/id/40">手机版</a></li>						</ul>
+							<for start="0" end="3" name="i">
+							<li><a href="{:U('List/index', array('id' => $v['child'][$i]['id']))}">{$v['child'][$i]['name']}</a></li>
+							</for>							
+						</ul>
 					</div>
 					<div class='list-more hidden'>
 						<ul>
-							<li><a href="/wenda/index.php/List/index/id/41">升级</a></li><li><a href="/wenda/index.php/List/index/id/43">BUG</a></li>						</ul>
+							<for start="3" end="count($v['child'])"  name="i">
+							<li><a href="{:U('List/index', array('id' => $v['child'][$i]['id']))}">{$v['child'][$i]['name']}</a></li>
+							</for>						
+						</ul>
 					</div>
-				</li><li class='list-l1'>
-					<div class='list-l1-wrap'>
-						<h4><a href="/wenda/index.php/List/index/id/25">开发</a></h4>
-						<ul class='list-l2'>
-							<li><a href="/wenda/index.php/List/index/id/28">开发设计</a></li><li><a href="/wenda/index.php/List/index/id/27">开发建议</a></li><li><a href="/wenda/index.php/List/index/id/26">开发功能</a></li>						</ul>
-					</div>
-					<div class='list-more hidden'>
-						<ul>
-							<li><a href="/wenda/index.php/List/index/id/42">开发费用</a></li>						</ul>
-					</div>
-				</li><li class='list-l1'>
-					<div class='list-l1-wrap'>
-						<h4><a href="/wenda/index.php/List/index/id/44">技术相关</a></h4>
-						<ul class='list-l2'>
-							<li><a href="/wenda/index.php/List/index/id/47">css</a></li><li><a href="/wenda/index.php/List/index/id/46">javascript</a></li><li><a href="/wenda/index.php/List/index/id/45">PHP</a></li>						</ul>
-					</div>
-					<div class='list-more hidden'>
-						<ul>
-							<li><a href="/wenda/index.php/List/index/id/48">python</a></li><li><a href="/wenda/index.php/List/index/id/49">perl</a></li>						</ul>
-					</div>
-				</li>			</ul>
+				</li>
+			</foreach>		
+			</ul>
 		</div>
 
 		<div id='center'>

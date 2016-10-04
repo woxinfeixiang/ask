@@ -9,6 +9,22 @@ function p ($array) {
 	echo '</pre>';
 }
 
+/**
+ * 把一个数组的指定字段组合成一维数组
+ */
+function only_array($array, $field) {
+	$arr = array();
+	foreach  ($array as $v) {
+		$arr[] = $v[$field];
+	}
+
+	return $arr;
+}
+
+/**
+ * 异位或加密
+ */
+
 function encrytion ($value, $type=0) {
 	$key = md5(C('AUTO_LOGIN_KEY'));
 	if ($type) {

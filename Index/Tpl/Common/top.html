@@ -53,6 +53,7 @@
 	<p class='total'>累计提问：10240000</p>
 </div>
 
+<if  condition="!isset($_SESSION['uid']) OR ! isset($_SESSION['username'])">
 <script type="text/javascript" src='/wd/Public/Js/validate.js'></script>
 	<script type="text/javascript">
 		var CONTROL = "__APP__/Common/";
@@ -141,4 +142,5 @@
 			</form>
 		</div>
 	</div>
+</if>
 <!--背景遮罩--><div id='background' class='hidden'></div>
