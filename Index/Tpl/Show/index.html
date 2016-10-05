@@ -1,117 +1,63 @@
-<include file="Common:top" />
-	<link rel="stylesheet" href="/wenda/Public/Css/show.css" />
-	<script type="text/javascript">
-		window.onload = function () {
-			$( '#anw-sub' ).click( function () {
-				return $('textarea[name=content]').val() == '' ? false : true;
-			} );
-		}
-	</script>
+<include file="Common:header" />
+	<link rel="stylesheet" href="__PUBLIC__/Css/show.css" />
+	
 </head>
 <body>
-	<include file="Common:header" />
+	<include file="Common:top" />
 	<div id='location'>
-		<a href="/wenda/index.php/List/index">全部分类</a>&nbsp;&gt;&nbsp;
-		<a href="/wenda/index.php/List/index/id/31">问答系统</a>
-			&nbsp;&gt;&nbsp;<a href="/wenda/index.php/List/index/id/32">使用</a>
-				</div>
+		<a href="{:U('List/index')}">全部分类</a>&nbsp;&gt;&nbsp;
+		<location cid='$ask["cid"]'>
+		<a href="{:U('List/index', array('id' => $id))}">{$name}</a>
+		<if condition="$id != $ask['cid']">
+			&nbsp;&gt;&nbsp;
+		</if>	
+		</location>
+	</div>
 
 <!--------------------中部-------------------->
 	<div id='center-wrap'>
 		<div id='center'>
 			<div id='left'>
 				<div id='answer-info'>
-					<div class='ans-state wait'></div>
+					<div class='ans-state <if condition="!$ask['solve']">wait'</if>></div>
 					<div class='answer'>
-						<p class='ans-title'>如何使用该系统</p>
+						<p class='ans-title'>{$ask.content}
+						<if condition="$ask['reward'] gt 0">
+						<b class="point">{$ask.reward}</b>
+						</if>
+						</p>
 					</div>
 					<ul>
-						<li><a href="/wenda/index.php/Member/index/id/6">后端12</a></li>
-						<li><i class='level lv3' title='Level 3'></i></li>
-						<li>昨天18:29</li>
+						<li><a href="{:U('Member/index', array('id' => $ask['uid']))}">{$ask.username}</a></li>
+						<li><i class='level lv{$ask.level}' title='Level {$ask.level}'></i></li>
+						<li>{$ask.time|time_format=###}</li>
 					</ul>
 					
+					<if condition='!$ask["solve"] AND (isset($_SESSION["uid"]) AND $_SESSION["uid"] != $ask["uid"])'>
+					<div class='ianswer'>
+						<form action="" method="">
+							<p>我来回答</p>
+							<textarea name="content"></textarea>
+							<input type="submit" value="提交回答" />
+						</form>
+					</div>
+					</if>
 										
-									</div>
+				</div>
+
+				
 
 				<div id='all-answer'>
 					<div class='ans-icon'></div>
 					<p class='title'>共 <strong>0</strong> 条回答</p>
 					<ul>
 											</ul>
-					<div class='page'>
-											</div>
+					<div class='page'>			</div>
 				</div>
 
-							</div>
-
-			<div id='right'>
-	<div class='r-login'>
-			<span class='login'><i></i>&nbsp;登录</span>
-			<span class='register'><i></i>&nbsp;注册</span>
-		</div>
-	
-	<div class='clear'></div>
-	<div class='star'>
-		<p class='title'>后盾问答之星</p>
-		<span class='star-name'>本日回答问题最多的人</span>
-					<div class='star-info'>
-				<div>
-					<a href="/wenda/index.php/Member/index/" class='star-face'><img src="/wenda/Public/Images/noface.gif" width='48px' height='48px'/></a>
-					<ul>
-						<li><a href="/wenda/index.php/Member/index/"></a></li>
-						<li><i class='level lv1' title='Level 1'></i></li>
-					</ul>
-				</div>
-				<ul class='star-count'>
-					<li>回答数：<span></span></li>
-					<li>采纳率：<span>0%</span></li>
-				</ul>
-			</div>
-		<span class='star-name'>历史回答问题最多的人</span>
-				<div class='star-info'>
-			<div>
-				<a href="/wenda/index.php/Member/index/" class='star-face'><img src="/wenda/Public/Images/noface.gif" width='48px' height='48px'/></a>
-				<ul>
-					<li><a href="/wenda/index.php/Member/index/"></a></li>
-					<li><i class='level lv1' title='Level 1'></i></li>
-				</ul>
-			</div>
-			<ul class='star-count'>
-				<li>回答数：<span></span></li>
-				<li>采纳率：<span>0%</span></li>
-			</ul>
-		</div>
 	</div>
 
-
-		<div class='star-list'>
-		<p class='title'>后盾问答助人光荣榜</p>
-		<div>
-			<ul class='ul-title'>
-				<li>用户名</li>
-				<li style='text-align:right;'>帮助过的人数</li>
-			</ul>
-			<ul class='ul-list'>
-				<li>
-						<a href="/wenda/index.php/Member/index/id/5"><i class='rank r1'></i>test002</a>
-						<span>0</span>
-					</li><li>
-						<a href="/wenda/index.php/Member/index/id/1"><i class='rank r2'></i>admin</a>
-						<span>0</span>
-					</li><li>
-						<a href="/wenda/index.php/Member/index/id/6"><i class='rank r3'></i>后端12</a>
-						<span>0</span>
-					</li><li>
-						<a href="/wenda/index.php/Member/index/id/3"><i class='rank r4'></i>后端</a>
-						<span>0</span>
-					</li><li>
-						<a href="/wenda/index.php/Member/index/id/4"><i class='rank r5'></i>测试00011</a>
-						<span>0</span>
-					</li>			</ul>
-		</div>
-	</div>
-</div>
+	<include file="Common:right" />
 		</div>
 	</div>
 <!--------------------中部结束-------------------->

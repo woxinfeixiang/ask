@@ -6,7 +6,7 @@
 					<a href="{:U('Member/index', array('id' => $id))}"><img src="{$face}" width='48' height='48'/></a>
 				</dt>
 				<dd class='username'>
-					<a href="{:U('Member/index', array('id' => $id))}"><b>{$username}</b><i class='level lv2' title='Level {$level}'></i></a>
+					<a href="{:U('Member/index', array('id' => $id))}"><b>{$username}</b><i class='level lv{$level}' title='Level {$level}'></i></a>
 				</dd>
 				<dd>金币：<a href="" style="color: #888888;"><b class='point'>0</b></a></dd>
 				<dd>经验值：{$exp}</dd>
