@@ -22,6 +22,25 @@ function only_array($array, $field) {
 }
 
 /**
+ * 传递一个分类ID，返回该分类所有的父级
+ * @param  [type] $array [description]
+ * @param  [type] $id    [description]
+ * @return [type]        [description]
+ */
+function get_all_parent ($array, $id) {
+	$arr = array();
+
+	foreach ($array as $v) {
+		if ($v['id'] == $id) {
+			$arr[] = $v;
+			$arr = array_merge($arr, get_all_parent($array, $v['pid']));
+		}
+	}
+
+	return $arr;
+}
+
+/**
  * 异位或加密
  */
 

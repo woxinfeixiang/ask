@@ -4,7 +4,16 @@
 <body>
 <include file="Common:top" />
 	<div id='location'>
-		<a href="">全部分类</a>		
+		<a href="{:U('List/index')}">全部分类</a>
+		<if condition='isset($_GET["id"])'>&nbsp;&gt;&nbsp;
+		<location cid='$_GET["id"]'>
+			<if condition='$id == $_GET["id"]'>
+				{$name}
+			<else/>
+				<a href="{:U('List/index', array('id' => $id))}">{$name}</a>&nbsp;&gt;
+			</if>
+		</location>
+		</if>	
 	</div>
 
 <!--------------------中部-------------------->

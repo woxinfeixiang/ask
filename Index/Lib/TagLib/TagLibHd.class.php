@@ -8,7 +8,8 @@ Class TagLibHd extends TagLib {
 	//自定义标签
 	Protected $tags = array(
 		'topcates' => array('attr' => 'limit'),
-		'userinfo' => array('attr' => 'uid')
+		'userinfo' => array('attr' => 'uid'),
+		'location' => array('attr' => 'cid')
 	);
 
 	//顶级分类对标签
@@ -45,6 +46,32 @@ Class TagLibHd extends TagLib {
 str;
 		$str .= $content;
 		return $str;
+	}
+
+	//当前所在分类位置
+	Public function _location ($attr, $content) {
+		$attr = $this->parseXmlAttr($attr);
+		$cid = $attr['cid'];
+
+		$str = <<<str
+<?php
+	\$cid = {$cid};
+	if (S('location_' . \$cid)){
+		\$_location_result = S('location_' . \$cid);
+	}else {
+		\$_location_category = M('category')->select();
+		\$_location_result = array_reverse(get_all_parent(\$_location_category, \$cid));
+		S('location_' . \$cid);
+	}
+	
+	foreach (\$_location_result as \$v) :
+		extract(\$v);
+?>
+str;
+	
+	$str .= $content;
+	$str .= '<?php endforeach;?>';
+	return $str;
 	}
 
 }
