@@ -9,7 +9,13 @@
 	<script type="text/javascript" src='__PUBLIC__/Js/jquery-1.7.2.min.js'></script>
 	<script type="text/javascript" src='__PUBLIC__/Js/top-bar.js'></script>
 	<link rel="stylesheet" href="__PUBLIC__/Css/show.css" />
-	
+	<script type="text/javascript">
+		window.onload = function () {
+			$( '#anw-sub' ).click( function() {
+				return $('textarea[name=content]').val() == '' ? false : true;	
+			});
+		}
+	</script>
 </head>
 <body>
 	<div id='top-fixed'>
@@ -175,10 +181,11 @@
 					</ul>
 					
 					<?php if(!$ask["solve"] AND (isset($_SESSION["uid"]) AND $_SESSION["uid"] != $ask["uid"])): ?><div class='ianswer'>
-						<form action="" method="">
+						<form action="<?php echo U('answer');?>" method="post">
 							<p>我来回答</p>
 							<textarea name="content"></textarea>
-							<input type="submit" value="提交回答" />
+							<input type="hidden" name="aid" value='<?php echo ($ask["id"]); ?>' >
+							<input type="submit" value="提交回答" id="anw-sub"/>
 						</form>
 					</div><?php endif; ?>
 										
@@ -188,10 +195,21 @@
 
 				<div id='all-answer'>
 					<div class='ans-icon'></div>
-					<p class='title'>共 <strong>0</strong> 条回答</p>
+					<p class='title'>共 <strong><?php echo ($count); ?></strong> 条回答</p>
 					<ul>
-											</ul>
-					<div class='page'>			</div>
+						<?php if(is_array($answer)): foreach($answer as $key=>$v): ?><li>
+								<div class='face'>
+									<a href="<?php echo U('Member/index', array('id' => $v['id']));?>">
+									<img src="<?php if($v["face"]): ?>__ROOT__/Uploads/Face/<?php echo ($v["face"]); else: ?>__PUBLIC__/Images/noface.gif<?php endif; ?>" width='48' height='48'/>
+									<?php echo ($v["username"]); ?>				
+									</a>
+								</div>
+								<div class='cons <?php if($key % 2): ?>fen<?php else: ?>blue<?php endif; ?>'>
+									<p><?php echo ($v["content"]); ?><span style='color:#888;font-size:12px'>&nbsp;&nbsp;(<?php echo (time_format($v["time"])); ?>)</span></p>
+								</div>		
+							</li><?php endforeach; endif; ?>	
+					</ul>
+					<div class='page'><?php echo ($page); ?></div>
 				</div>
 
 	</div>
