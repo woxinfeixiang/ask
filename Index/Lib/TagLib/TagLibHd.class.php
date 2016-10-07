@@ -39,7 +39,7 @@ Class TagLibHd extends TagLib {
 	\$_userinfoResult = M('user')->field(\$field)->find({$uid});
 	extract(\$_userinfoResult);
 	\$face = empty(\$face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . \$face;
-	\$adopt = floor(\$adopt / \$answer) . '%';
+	\$adopt = \$bingo['adopt'] / \$bingo['answer'] * 100 . '%';
 	\$face = __ROOT__ . \$face;
 	\$level = exp_to_level(\$exp);
 ?>

@@ -6,7 +6,7 @@ Class AskInfoViewModel extends ViewModel {
 
 	Protected $viewFields = array(
 		'ask' => array(
-			'id', 'content', 'reward', 'solve', 'time', 'cid',
+			'id', 'content', 'reward', 'solve', 'time', 'cid', 'answer',
 			'_type' => 'LEFT' 	
 		),
 

@@ -12,7 +12,7 @@
 			<ul class='property'>
 				<li>金币：<span>{$msg.point}</span></li>
 				<li>经验值：<span>{$msg.exp}</span></li>
-				<li>采纳率：<span>{:floor($msg['adopt'] / $msg['answer'])}%</span></li>
+				<li>采纳率：<span>{$bingo['adopt'] / $bingo['answer'] * 100}%</span></li>
 			</ul>
 			<div class='list'>
 				<p><span>我的提问 <b>(共{$msg.ask}条)</b></span><a href="">更多></a></p>

@@ -10,7 +10,7 @@ Class AnswerInfoViewModel extends ViewModel {
 			'_type' => 'LEFT'
 		),
 		'user' => array(
-			'id' => 'uid', 'username', 'face',
+			'id' => 'uid', 'username', 'face', 'exp', 'answer', 'adopt',
 			'_on' => 'answer.uid = user.id'
 		)
 	);

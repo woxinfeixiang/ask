@@ -214,7 +214,7 @@
 		</div>
 	<?php else: ?>	
 		<?php
- $field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp'); $_userinfoResult = M('user')->field($field)->find($_SESSION["uid"]); extract($_userinfoResult); $face = empty($face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . $face; $adopt = floor($adopt / $answer) . '%'; $face = __ROOT__ . $face; $level = exp_to_level($exp); ?><div class='userinfo'>
+ $field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp'); $_userinfoResult = M('user')->field($field)->find($_SESSION["uid"]); extract($_userinfoResult); $face = empty($face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . $face; $adopt = $bingo['adopt'] / $bingo['answer'] * 100 . '%'; $face = __ROOT__ . $face; $level = exp_to_level($exp); ?><div class='userinfo'>
 			<dl>
 				<dt>
 					<a href="<?php echo U('Member/index', array('id' => $id));?>"><img src="<?php echo ($face); ?>" width='48' height='48'/></a>

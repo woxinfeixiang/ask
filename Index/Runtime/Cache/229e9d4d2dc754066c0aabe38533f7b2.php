@@ -154,7 +154,7 @@
 	<div id='center'>
 		<div id='left'>
 	<?php
- $field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp'); $_userinfoResult = M('user')->field($field)->find($_SESSION["uid"]); extract($_userinfoResult); $face = empty($face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . $face; $adopt = floor($adopt / $answer) . '%'; $face = __ROOT__ . $face; $level = exp_to_level($exp); ?><div class='userinfo' >
+ $field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp'); $_userinfoResult = M('user')->field($field)->find($_SESSION["uid"]); extract($_userinfoResult); $face = empty($face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . $face; $adopt = $bingo['adopt'] / $bingo['answer'] * 100 . '%'; $face = __ROOT__ . $face; $level = exp_to_level($exp); ?><div class='userinfo' >
 			<dl>
 				<dt>
 					<a href="<?php echo U('Member/index', array('id' => $id));?>"><img src="<?php echo ($face); ?>" width='48' height='48'/></a>
@@ -202,7 +202,7 @@
 			<ul class='property'>
 				<li>金币：<span><?php echo ($msg["point"]); ?></span></li>
 				<li>经验值：<span><?php echo ($msg["exp"]); ?></span></li>
-				<li>采纳率：<span><?php echo floor($msg['adopt'] / $msg['answer']);?>%</span></li>
+				<li>采纳率：<span><?php echo ($bingo['adopt'] / $bingo['answer'] * 100); ?>%</span></li>
 			</ul>
 			<div class='list'>
 				<p><span>我的提问 <b>(共<?php echo ($msg["ask"]); ?>条)</b></span><a href="">更多></a></p>

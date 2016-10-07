@@ -16,14 +16,21 @@ Class ShowAction extends CommonAction {
 		$ask['level'] = exp_to_level($ask['level']);		
 		$this->ask = $ask;
 
+		//满意回答
+		$db = D('AnswerInfoView');
+		$where = array('aid' => $id, 'answer.adopt' => 1);
+		$this->bingo = $db->where($where)->find();
+
+		
+
 		//全部回答
 		import('ORG.Util.Page');
-		$where = array('aid' => $id, 'adopt' => 0);
+		$where = array('aid' => $id, 'answer.adopt' => 0);
 		//计算分页条数
 		$count = M('answer')->where($where)->count();
 		$page = new Page($count, 10);
 		$limit = $page->firstRow . ',' . $page->listRows;
-		$answer = D("AnswerInfoView")->limit($limit)->select();
+		$answer = $db->where($where)->limit($limit)->select();
 		$this->answer = $answer;
 		$this->page = $page->show();
 		$this->count = $count;
@@ -60,6 +67,26 @@ Class ShowAction extends CommonAction {
 
 
 
+	}
+
+	//采纳答案
+	Public function adopt () {
+		$id = $this->_get('id', 'intval');
+		$aid = $this->_get('aid', 'intval');
+		$uid = $this->_get('uid', 'intval');
+
+		$data = array(
+			'id' => $id,
+			'adopt' => 1
+			);
+
+		if (M('answer')->save($data)) {
+			M('ask')->save(array('id' => $aid, 'solve' => 1));
+			M('user')->where(array('id' => $uid))->setInc('adopt');
+			$this->success('已采纳', $_SERVER['HTTP_REFERER']);
+		} else {
+			$this->error('采纳失败, 请重试...', $_SERVER['HTTP_REFERER']);
+		}
 	}
 }
 

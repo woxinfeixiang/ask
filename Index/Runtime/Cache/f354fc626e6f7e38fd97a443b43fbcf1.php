@@ -168,7 +168,7 @@
 		<div id='center'>
 			<div id='left'>
 				<div id='answer-info'>
-					<div class='ans-state <?php if(!$ask['solve']): ?>wait'<?php endif; ?>></div>
+					<div class='ans-state <?php if(!$ask['solve']): ?>wait<?php endif; ?>'></div>					
 					<div class='answer'>
 						<p class='ans-title'><?php echo ($ask["content"]); ?>
 						<?php if($ask['reward'] > 0): ?><b class="point"><?php echo ($ask["reward"]); ?></b><?php endif; ?>
@@ -178,7 +178,8 @@
 						<li><a href="<?php echo U('Member/index', array('id' => $ask['uid']));?>"><?php echo ($ask["username"]); ?></a></li>
 						<li><i class='level lv<?php echo ($ask["level"]); ?>' title='Level <?php echo ($ask["level"]); ?>'></i></li>
 						<li><?php echo (time_format($ask["time"])); ?></li>
-					</ul>
+					</ul>									
+
 					
 					<?php if(!$ask["solve"] AND (isset($_SESSION["uid"]) AND $_SESSION["uid"] != $ask["uid"])): ?><div class='ianswer'>
 						<form action="<?php echo U('answer');?>" method="post">
@@ -188,14 +189,30 @@
 							<input type="submit" value="提交回答" id="anw-sub"/>
 						</form>
 					</div><?php endif; ?>
+					
+					<?php if($bingo): ?><div class='ans-right'>
+						<p class='title'><i></i>满意回答<span><?php echo (time_format($bingo["time"])); ?></span></p>
+						<p class='ans-cons'><?php echo ($bingo["content"]); ?></p>
+						<dl>
+							<dt>
+								<a href="<?php echo U('Member/index', array('id' => $bingo['uid']));?>">
+								<img src="<?php if($bingo["face"]): ?>__ROOT__/Uploads/Face/<?php echo ($bingo["face"]); else: ?>/wenda/Public/Images/noface.gif<?php endif; ?>" width='48' height='48'/></a>
+							</dt>
+							<dd>
+								<a href="<?php echo U('Member/index', array('id' => $bingo['uid']));?>"><?php echo ($bingo["username"]); ?></a>
+							</dd>
+							<dd><i class='level lv<?php echo (exp_to_level($bingo["exp"])); ?>'></i></dd>
+							<dd><?php echo ($bingo['adopt'] / $bingo['answer']) * 100;?>%</dd>
+						</dl>
+					</div><?php endif; ?>
 										
-				</div>
+			</div>
 
 				
 
 				<div id='all-answer'>
 					<div class='ans-icon'></div>
-					<p class='title'>共 <strong><?php echo ($count); ?></strong> 条回答</p>
+					<p class='title'>共 <strong><?php echo ($ask["answer"]); ?></strong> 条回答</p>
 					<ul>
 						<?php if(is_array($answer)): foreach($answer as $key=>$v): ?><li>
 								<div class='face'>
@@ -206,7 +223,8 @@
 								</div>
 								<div class='cons <?php if($key % 2): ?>fen<?php else: ?>blue<?php endif; ?>'>
 									<p><?php echo ($v["content"]); ?><span style='color:#888;font-size:12px'>&nbsp;&nbsp;(<?php echo (time_format($v["time"])); ?>)</span></p>
-								</div>		
+								</div>
+								<?php if(isset($_SESSION["uid"]) && $_SESSION["uid"] == $ask["uid"] && !$ask["solve"]): ?><a href="<?php echo U('adopt', array('id' => $v['id'], 'aid' => $ask['id'], 'uid'=>$v['uid']));?>" class="adopt-btn">采纳</a><?php endif; ?>	
 							</li><?php endforeach; endif; ?>	
 					</ul>
 					<div class='page'><?php echo ($page); ?></div>
@@ -221,7 +239,7 @@
 		</div>
 	<?php else: ?>	
 		<?php
- $field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp'); $_userinfoResult = M('user')->field($field)->find($_SESSION["uid"]); extract($_userinfoResult); $face = empty($face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . $face; $adopt = floor($adopt / $answer) . '%'; $face = __ROOT__ . $face; $level = exp_to_level($exp); ?><div class='userinfo'>
+ $field = array('id', 'username', 'face', 'answer', 'adopt', 'ask', 'point', 'exp'); $_userinfoResult = M('user')->field($field)->find($_SESSION["uid"]); extract($_userinfoResult); $face = empty($face) ? '/Public/Images/noface.gif' : '/Uploads/Face/' . $face; $adopt = $bingo['adopt'] / $bingo['answer'] * 100 . '%'; $face = __ROOT__ . $face; $level = exp_to_level($exp); ?><div class='userinfo'>
 			<dl>
 				<dt>
 					<a href="<?php echo U('Member/index', array('id' => $id));?>"><img src="<?php echo ($face); ?>" width='48' height='48'/></a>
