@@ -58,14 +58,26 @@
 					<span class='wait-as'>待解决问题</span>
 					<a href=''>更多>></a>
 				</dt>
-							</dl>
+				<foreach name="wait" item="v">
+				<dd>
+					<a href="{:U('Show/index', array(id => $v['id']))}">{$v.content}</a>
+					<span>{$v.answer}回答</span>
+				</dd>
+				</foreach>	
+			</dl>
 
 			<dl class='answer-list'>
 				<dt>
 					<span class='reward-as'>高分悬赏问题</span>
 					<a href=''>更多>></a>
 				</dt>
-							</dl>
+				<foreach name="rewardAsk" item="v">
+				<dd>
+					<a href="{:U('Show/index', array(id => $v['id']))}"><b>{$v.reward}</b>{$v.content}</a>
+					<span>{$v.answer}回答</span>
+				</dd>
+				</foreach>	
+			</dl>
 
 		</div>
 		<include file='Common:right' />

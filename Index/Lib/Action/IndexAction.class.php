@@ -20,7 +20,18 @@ Class IndexAction extends CommonAction {
 		}
 		
 		$this->cate = $cate;
-		//p($cate);die;	
+		
+		//待解决问题
+		$db = M('ask');
+		$where = array('solve' => 0, 'reward' => 0);
+		$this->wait = $db->where($where)->limit(15)->select();
+
+		//高悬赏问题
+		$where = array('solve' => 0, 'reward' => array('GT', 0));
+		$this ->rewardAsk = $db->where($where)->limit(15)->select();
+
+
+
 		$this->display();
 	}
 }

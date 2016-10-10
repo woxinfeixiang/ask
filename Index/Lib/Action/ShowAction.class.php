@@ -33,8 +33,14 @@ Class ShowAction extends CommonAction {
 		$answer = $db->where($where)->limit($limit)->select();
 		$this->answer = $answer;
 		$this->page = $page->show();
-		$this->count = $count;
-		//p($answer);die;
+		
+
+		//待解决的相关问题
+		$where = array('cid' => $ask['cid'], 'solve' => 0, 'id' => array('NEQ', $id));
+		$this->wait = M('ask')->where($where)->limit(5)->select();
+		
+
+		
 		$this->display();
 	}
 
@@ -83,6 +89,17 @@ Class ShowAction extends CommonAction {
 		if (M('answer')->save($data)) {
 			M('ask')->save(array('id' => $aid, 'solve' => 1));
 			M('user')->where(array('id' => $uid))->setInc('adopt');
+
+			$db = M('user');
+			$db->where(array(id => $uid))->setInc('adopt');
+
+			$reward = M('ask')->field(array('uid', 'reward'))->find($aid);
+			if ($reward) {
+				$db->where(array('id' => $reward['uid']))->setDec('point', $reward['reward']);
+				$db->where(array('id' => $uid))->setInc('point', $reward['reward']);
+			}
+
+
 			$this->success('已采纳', $_SERVER['HTTP_REFERER']);
 		} else {
 			$this->error('采纳失败, 请重试...', $_SERVER['HTTP_REFERER']);

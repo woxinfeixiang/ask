@@ -51,6 +51,8 @@
 					</div>
 					</if>
 					
+
+
 					<if condition="$bingo">
 					<div class='ans-right'>
 						<p class='title'><i></i>满意回答<span>{$bingo.time|time_format=###}</span></p>
@@ -70,7 +72,6 @@
 					</if>
 										
 			</div>
-
 				
 
 				<div id='all-answer'>
@@ -97,7 +98,25 @@
 					<div class='page'>{$page}</div>
 				</div>
 
+
+				<if condition="$wait">
+				<div id='other-ask'>
+						<p class='title'>待解决的相关问题</p>
+						<table>
+							<foreach name="wait" item="v">
+								<tr>
+									<td class='t1'><a href="{:U('Show/index', array('id' => $v['id']))}">{$v.content}</a></td>
+									<td>{$v.answer}&nbsp;回答</td>
+									<td>{$v.time|time_format=###}</td>
+								</tr>
+							</foreach>						
+						</table>
+				</div>
+				</if>	
+
 	</div>
+
+
 
 	<include file="Common:right" />
 		</div>
